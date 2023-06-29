@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body style = "background-color:#220000" id = "aaa">
+<br>
+<a id = "a1" style = "color:white"> Verifique seus dados</a><br>
+<h3 style = "color:#FFEEEE">
+A atividade ser&aacute; nesse cen&aacute;rio: uma cozinha e seus eletrodom&eacute;sticos. A sua tarefa &eacute; fazer a liga&ccedil;&atilde;o correta desses equipamentos. <br><br> 
+<div style = "display: flex;justify-content: center;">
+<img src = "original.png" style = "height:60vh">
+</div>
+Para isso, voc&ecirc; poder&aacute;. interagir com seis equipamentos: Microondas, geladeira, fog&atilde;o, coifa, l&acirc;mpada 1 e l&acirc;mpada 2. Clique em "pr&oacute;ximo" para ver.
+</h3>
+
+
+<script>
+
+window.onload = function(){
+
+	nome = localStorage.getItem("nome")
+	turma = localStorage.getItem("turma")
+	email = localStorage.getItem("email")
+
+	document.getElementById("a1").innerHTML = nome + " - " + turma + "<br>" + email
+}
+
+
+function openFullscreen() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function anterior(){location.replace("index.html")}
+function proximo(){location.replace("e2.html")}
+
+</script>
+
+		<br>
+		<div style = "display: flex;justify-content: center;">
+		<input type="button" style = "height:50px;width:150px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="Anterior" onClick = "anterior()"/>
+		<input type="button" style = "height:50px;width:150px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="Pr&oacute;ximo" onClick = "proximo()"/>
+		</div>
+</body>
+</html>

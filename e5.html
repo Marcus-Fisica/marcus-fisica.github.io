@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body style = "background-color:#220000" id = "aaa">
+<br>
+<a id = "a1" style = "color:white"> Verifique seus dados</a><br>
+<h3 style = "color:#FFEEEE">
+Essas s&atilde;o as informa&ccedil;&otilde;es.<br><br> 
+<div style = "display: flex;justify-content: center;">
+<img src = "c5.png" style = "height:60vh">
+</div>
+Para entender melhor, entenda o que esse desenho quer dizer:
+</h3>
+
+
+<script>
+
+window.onload = function(){
+
+	nome = localStorage.getItem("nome")
+	turma = localStorage.getItem("turma")
+	email = localStorage.getItem("email")
+
+	document.getElementById("a1").innerHTML = nome + " - " + turma + "<br>" + email
+}
+
+
+function openFullscreen() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function anterior(){location.replace("e4.html")}
+function proximo(){location.replace("e6.html")}
+
+</script>
+
+		<br>
+		<div style = "display: flex;justify-content: center;">
+		<input type="button" style = "height:50px;width:150px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="Anterior" onClick = "anterior()"/>
+		<input type="button" style = "height:50px;width:150px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="Pr&oacute;ximo" onClick = "proximo()"/>
+		</div>
+</body>
+</html>

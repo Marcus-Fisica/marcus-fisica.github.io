@@ -1,0 +1,367 @@
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=0.6">
+</head>
+
+<body>
+<table><tr>
+<td style = "width:900">
+<div>
+<img id="image" src="original.png" height="600" width = "900" usemap="#Map" style="position: absolute; top: 0; left: 0;">
+<img id="imicro" src="fundo.png" height="600" width = "900" style="position: absolute; top: 0; left: 0;" usemap="#Map">
+<img id="ilamp" src="fundo.png" height="600" width = "900" style="position: absolute; top: 0; left: 0;" usemap="#Map">
+<img id="igel" src="fundo.png" height="600" width = "900" style="position: absolute; top: 0; left: 0;" usemap="#Map">
+<img id="icoif" src="fundo.png" height="600" width = "900" style="position: absolute; top: 0; left: 0;" usemap="#Map">
+<img id="ifog" src="fundo.png" height="600" width = "900" style="position: absolute; top: 0; left: 0;" usemap="#Map">
+
+    <map name="Map">
+    <area class="blue" onclick="Lamp1()" shape="poly" coords="83,21,65,111,117,111,99,21">
+	<area class="blue" onclick="Lamp2()" shape="poly" coords="675,111,724,111,707,21,689,21">
+	<area class="blue" onclick="coif()" shape="poly" coords="315,169,323,186,400,186,413,169,376,144,381,79,344,79,344,148">
+	<area class="blue" onclick="microondas()" shape="poly" coords="201,223,206,274,288,274,290,223">
+	<area class="blue" onclick="gelad()" shape="poly" coords="541,419,649,419,660,123,532,123">
+	<area class="blue" onclick="fog()" shape="poly" coords="313,421,416,421,419,269,310,269">
+	<area class="blue" onclick="disj(1)" shape="poly" coords="21,166,48,166,48,208,21,208">
+	<area class="blue" onclick="disj(2)" shape="poly" coords="22,305,48,305,48,347,22,347">
+	<area class="blue" onclick="externo()" shape="poly" coords="18,233,32,223,67,239,67,272,32,290,18,290">
+</map>
+</div>
+</td>
+<td style = "text-align:top">
+
+Especifica&ccedil;&otilde;es:<br>
+L&acirc;mpadas: 55V - 30W<br>
+Microondas: 110V - 1210W<br>
+Coifa: 110V - 202W<br>
+Fog&atilde;o: 110V - 60W<br>
+Geladeira: 110V - 173W<br>
+Disjuntor 1: m&aacute;ximo de 5A <br>
+Disjuntor 2: m&aacute;ximo de 12A
+<br><br>
+liga&ccedil;&otilde;es:<br>
+<a id = "circ"></a>
+<br><br>
+Consumo:
+<a id = "cons">0</a>W
+
+
+<h1><a id = "alerta" style = "color:red"></a></h1>
+<input type = "button" value = "Refazer" onClick = "reset()">
+</td>
+</tr>
+</table>
+
+<script>
+var vez = "";
+var dsj = 0;
+var texto = ""
+V = 0;
+i1 = 0;
+i2 = 0;
+P = 0;
+R = 0;
+L1 = 0;
+L2 = 0;
+MW = 0;
+Gel = 0;
+Coi = 0;
+fo = 0;
+aberto = 0;
+
+function reset(){
+
+vez = "";
+dsj = 0;
+texto = ""
+V = 0;
+i1 = 0;
+i2 = 0;
+P = 0;
+R = 0;
+L1 = 0;
+L2 = 0;
+MW = 0;
+Gel = 0;
+Coi = 0;
+fo = 0;
+aberto = 0;
+escrever();
+document.getElementById("cons").innerHTML = 0;
+document.getElementById("alerta").innerHTML = ""
+document.getElementById("image").src = "original.png"
+document.getElementById("icoif").src = "fundo.png"
+document.getElementById("ifog").src = "fundo.png"
+document.getElementById("igel").src = "fundo.png"
+document.getElementById("ilamp").src = "fundo.png"
+document.getElementById("imicro").src = "fundo.png"
+
+}
+
+function escrever(){
+
+document.getElementById("circ").innerHTML = texto;
+
+}
+
+function fecharLoop(num){
+
+
+if (num == 1){
+	if (vez == "fogao"){document.getElementById("ifog").src = "fogao12A.png"}
+	else if (vez == "geladeira"){document.getElementById("igel").src = "geladeira12A.png"}
+	else if (vez == "coifa"){document.getElementById("icoif").src = "coifa12A.png"}
+	else if (vez == "microondas"){document.getElementById("imicro").src = "micro12A.png"}
+	else if (vez == "lampada2"){document.getElementById("ilamp").src = "lampada1212A.png"}
+	else if (vez == "lampada1"){document.getElementById("ilamp").src = "lampada2112A.png"}
+}else if (num == 2){
+	if (vez == "fogao"){document.getElementById("ifog").src = "fogao5A.png"}
+	else if (vez == "geladeira"){document.getElementById("igel").src = "geladeira5A.png"}
+	else if (vez == "coifa"){document.getElementById("icoif").src = "coifa5A.png"}
+	else if (vez == "microondas"){document.getElementById("imicro").src = "micro5A.png"}
+	else if (vez == "lampada2"){document.getElementById("ilamp").src = "lampada125A.png"}
+	else if (vez == "lampada1"){document.getElementById("ilamp").src = "lampada215A.png"}
+}
+
+
+P = P + (V*V)/R;
+if (num == 1){
+	i1 = i1 + V/R}
+else {
+	i2 = i2 + V/R}
+
+document.getElementById("cons").innerHTML = P.toFixed(2);
+texto = texto + " >>> ligacao externa <br><br>" 
+escrever();
+dsj = 0;
+
+
+if (R == 100){
+
+document.getElementById("alerta").innerHTML = "Voc&ecirc; queimou a l&acirc;mpada!!!"
+
+texto = texto + "---"+"queimou  "
+registrar();
+
+location.replace("queima1.html")
+
+}
+R = 0;
+if ((i1 > 5)||(i2 > 12)){desarmar(num)
+V = 0;
+i1 = 0;
+i2 = 0;
+P = 0;
+R = 0;
+L1 = 0;
+L2 = 0;
+MW = 0;
+Gel = 0;
+Coi = 0;
+fo = 0;
+}
+
+if (L1*L2*MW*Gel*Coi*fo >0){ 
+
+document.getElementById("alerta").innerHTML = "Voc&ecirc; Conseguiu"
+texto = texto +"---"+"sucesso"
+registrar();
+setTimeout(function(){location.replace("https://forms.gle/6cQeRgJrfsTZttHTA")},5000);
+
+
+}
+
+
+
+}
+
+function malfuncionamento(){
+
+texto = texto + "---"+"errado";
+registrar();
+document.getElementById("alerta").innerHTML = "O equipamento n&atilde;o funciona!"
+location.replace("malf1.html")
+}
+
+function desarmar(num){
+
+texto = texto + "---"+"desarmou";
+registrar();
+document.getElementById("alerta").innerHTML = "o disjuntor "+num+" desarmou!!!"
+location.replace("desarme1.html")
+
+
+
+}
+
+function externo(){ 
+if (vez == "externo"){}else{
+if (aberto == 0){
+
+texto = texto + " ligacao externa "
+vez = "externo"
+escrever();
+aberto = 1;
+}else if (aberto == 1){
+
+fecharLoop(dsj)
+aberto = 0;
+}
+}
+}
+
+function disj(num){
+	if (aberto == 1){
+		if ((vez == "disjuntor")&&(dsj == num)){}
+		else if ((vez == "disjuntor")&&(dsj != num)){
+		alert("nao ligar um disjuntor ao outro")
+		}
+		else{
+			if (dsj == 0){
+			dsj = num;
+			texto = texto + ">>> disjuntor " + num
+			vez = "disjuntor"
+			V = 110;
+			escrever();
+			}else if (dsj != num)
+			alert("nao ligar um disjuntor ao outro");
+			else{
+			alert("este trecho ja esta conectado ao disjuntor");
+			}
+		
+		}
+	}else{
+	alert("comece pelo fio externo")
+	}
+
+};
+
+function Lamp1(){
+	if (dsj == 0){alert("Comece pelo disjuntor")}
+	else if (vez == "lampada1"){}
+	else if(L1 == 1){alert("voce ja usou essa lampada")}
+	else{
+		texto = texto + " >>> Lampada 1"
+		if ((vez != "disjuntor")&&(vez != "lampada2")){malfuncionamento()}
+		if (dsj > 0){
+		vez = "lampada1"
+		L1 = 1;
+		R = R + 100;
+		escrever();
+		}
+	
+	}
+
+};
+
+function Lamp2(){
+	if (dsj == 0){alert("Comece pelo disjuntor")}
+	else if (vez == "lampada2"){}
+	else if(L2 == 1){alert("voce ja usou essa lampada")}
+	else{
+		texto = texto + " >>> Lampada 2"
+		if ((vez != "disjuntor")&&(vez != "lampada1")){malfuncionamento()}
+		if (dsj > 0){
+		vez = "lampada2"
+		L2 = 1;
+		R = R + 100;
+		escrever();
+		}
+	
+	}
+
+};
+
+function microondas(){
+	if (dsj == 0){alert("Comece pelo disjuntor")}
+	else if (vez == "microondas"){}
+	else if(MW == 1){alert("voce ja usou o microondas")}
+	
+	else{
+		texto = texto + " >>> microondas"
+		if (vez != "disjuntor"){malfuncionamento()}
+		if (dsj > 0){
+		vez = "microondas"
+		MW = 1;
+		R = R + 10;
+		escrever();
+		}
+	
+	}
+
+};
+
+function gelad(){
+	if (dsj == 0){alert("Comece pelo disjuntor")}
+	else if (vez == "geladeira"){}
+	else if(Gel == 1){alert("voce ja usou a geladeira")}
+	else{
+		texto = texto + " >>> geladeira"
+		if (vez != "disjuntor"){malfuncionamento()}
+		if (dsj > 0){
+		vez = "geladeira"
+		Gel = 1;
+		R = R + 70;
+		escrever();
+		}
+	
+	}
+
+};
+
+function coif(){
+	if (dsj == 0){alert("Comece pelo disjuntor")}
+	else if (vez == "coifa"){}
+	else if(Coi == 1){alert("voce ja usou a coifa")}
+	else{
+		texto = texto + " >>> coifa"
+		if (vez != "disjuntor"){malfuncionamento()}
+		if (dsj > 0){
+		vez = "coifa"
+		Coi = 1;
+		R = R + 60;
+		escrever();
+		}
+	
+	}
+
+};
+
+function fog(){
+	if (dsj == 0){alert("Comece pelo disjuntor")}
+	else if (vez == "fogao"){}
+	else if(fo == 1){alert("voce ja usou o fogao")}
+	else{
+		texto = texto + " >>> fogao"
+		if (vez != "disjuntor"){malfuncionamento()}
+		if (dsj > 0){
+		vez = "fogao"
+		fo = 1;
+		R = R + 200;
+		escrever();
+		}
+	
+	}
+
+}
+
+function registrar(){
+
+		nome = localStorage.getItem("nome")
+		turma = localStorage.getItem("turma")
+		email = localStorage.getItem("email")
+		registro = email + "---" + nome + "---"+turma+"---"+texto
+		var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            }
+            };
+            xmlhttp.open("POST", "registrar.php?r=" + registro, true);
+            xmlhttp.send()
+}
+
+</script>
+
+</body>
+
+
+</html>

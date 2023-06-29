@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body style = "background-color:#220000" id = "aaa">
+<br>
+<a id = "a1" style = "color:white"> Verifique seus dados</a><br>
+<h3 style = "color:#FFEEEE">
+Essas s&atilde;o as informa&ccedil;&otilde;es.<br><br> 
+<div style = "display: flex;justify-content: center;">
+<img src = "c4.png" style = "height:40vh">
+</div>
+Voc&ecirc; precisa ligar cada equipamento acompanhando a trajet&oacute;ria da corrente el&eacute;trica (sempre come&ccedil;ando pela "fase"). Vamos supor que voc&ecirc; queira ligar um fio da rede externa ao disjuntor 1, voc&ecirc; clica na caixa (que simboliza a rede externa) e logo em seguida no disjuntor 1. Caso queira, por exemplo, ligar o outro terminal do disjuntor 1 na coifa, basta, em seguida, clicar na coifa.<br><br>
+Para ligar a outra extremidade de qualquer equipamento ao barramento neutro da rede, basta, logo ap&oacute;s clicar no equipamento, clicar na caixa novamente. As liga&ccedil;&otilde;es ficam simbolizadas no desenho:
+</h3>
+
+
+<script>
+
+window.onload = function(){
+
+	nome = localStorage.getItem("nome")
+	turma = localStorage.getItem("turma")
+	email = localStorage.getItem("email")
+
+	document.getElementById("a1").innerHTML = nome + " - " + turma + "<br>" + email
+}
+
+
+function openFullscreen() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function anterior(){location.replace("e3.html")}
+function proximo(){location.replace("e5.html")}
+
+</script>
+
+		<br>
+		<div style = "display: flex;justify-content: center;">
+		<input type="button" style = "height:50px;width:150px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="Anterior" onClick = "anterior()"/>
+		<input type="button" style = "height:50px;width:150px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="Pr&oacute;ximo" onClick = "proximo()"/>
+		</div>
+</body>
+</html>

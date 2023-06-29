@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body style = "background-color:#000000" id = "aaa">
+<br>
+<a id = "a1" style = "color:white"> Verifique seus dados</a><br>
+<h3 style = "color:#FFEEEE; text-align:center"><br><br>Quando dois equipamentos est&atilde;o em s&eacute;rie, a tens&atilde;o de alimenta&ccedil;&atilde;o (no caso, de 110V) &eacute; dividida entre eles, e nenhum deles receber&aacute; a tens&atilde;o 110V. 
+<br><br>
+Pelo menos um dos equipamentos que voc&ecirc; acionou precisa de 110V, e, nessa situa&ccedil;&atilde;o, ele n&atilde;o vai funcionar. Para receber essa tens&atilde;o ele tem que ser ligado direto &agrave; fase e ao neutro da casa, sem que o circuito passe por algum outro equipamento que consuma energia<br><br>
+
+<div style = "display: flex;justify-content: center;">
+<img src = "serie2.png" style = "height:40vh">
+</div>  
+
+</h3>
+
+
+<script>
+
+window.onload = function(){
+
+	nome = localStorage.getItem("nome")
+	turma = localStorage.getItem("turma")
+	email = localStorage.getItem("email")
+
+	document.getElementById("a1").innerHTML = nome + " - " + turma + "<br>" + email
+}
+
+
+function openFullscreen() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function refazer(){location.replace("atividade.html")}
+
+
+</script>
+
+		<br>
+		<div style = "display: flex;justify-content: center;">
+		<input type="button" style = "height:50px;width:200px;background-color:#FF0000;color:#FFFFFF;font-size:1.3em " value="refazer" onClick = "refazer()"/>
+		"                "
+		</div>
+</body>
+</html>

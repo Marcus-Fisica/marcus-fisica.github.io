@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body style = "background-color:#000000" id = "aaa">
+<br>
+<a id = "a1" style = "color:white"> Verifique seus dados</a><br>
+<h3 style = "color:#FFEEEE; text-align:center"><br><br>
+Cada l&acirc;mpada funciona com 55V. Se voc&ecirc; ligar qualquer uma delas diretamente na fase e no neutro, vai estar ligando ela  tens&atilde;o da casa, 110V, ou seja, o dobro do especificado pelo equipamento<br><br>
+
+<div style = "display: flex;justify-content: center;">
+<img src = "queima.jpg" style = "height:40vh">
+</div>  
+
+</h3>
+
+
+<script>
+
+window.onload = function(){
+
+	nome = localStorage.getItem("nome")
+	turma = localStorage.getItem("turma")
+	email = localStorage.getItem("email")
+
+	document.getElementById("a1").innerHTML = nome + " - " + turma + "<br>" + email
+}
+
+
+function openFullscreen() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function explicar(){location.replace("queima3.html")}
+
+
+</script>
+
+		<br>
+		<div style = "display: flex;justify-content: center;">
+		<input type="button" style = "height:50px;width:200px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="continuar" onClick = "explicar()"/>
+		"                "
+		</div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<html>
+<title>Atividade extra</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+<style>
+body {
+  background-image: url('fundo1.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;  
+  background-size: cover;
+}
+</style>
+</head>
+
+<body>
+<div id="container">
+
+		<h1 style="text-align:center"> Atividade Extra</h1>
+		<br>
+		<h1 style="text-align:center;color:red" id = "aviso"></h1><br>
+	
+		Nome completo: <br><input id = "nome" type = "text" size = "30vw"><br><br>
+		e-mail: <br><input id = "email" type = "text" size = "30vw"><br><br>
+		Turma:<br><input id = "turma" type = "text" size = "30vw"><br><br>
+
+
+		<div style = "display: flex;justify-content: center;">
+		<input type="button" style = "height:50px; width:150px; background-color:#4CAF50; color:#FFFFFF; font-size:1.3em" value="Pr&oacute;ximo" onClick = "proximo()"/>
+		</div>
+</div>	
+		<script>
+
+		
+		
+		function proximo(){
+		var nome = document.getElementById("nome").value;
+		var email = document.getElementById("email").value;
+		var turma = document.getElementById("turma").value;
+		if ((nome == "")|| (email == "" )|| (turma == "")){
+		document.getElementById("aviso").innerHTML = "preencher todos os dados"
+		}else{
+		localStorage.setItem("nome",nome);
+		localStorage.setItem("turma",turma);
+		localStorage.setItem("email",email);
+		location.replace("e1.html")
+		}
+		}
+		
+		window.onload = () => sendPostMessage();
+
+		let height;
+		const sendPostMessage = () => {
+			if (height !== document.getElementById('container').offsetHeight) {
+		height = document.getElementById('container').offsetHeight;
+		window.parent.postMessage({
+		frameHeight: height
+		}, '*');
+		console.log(height) // check the message is being sent correctly
+		}
+			document.getElementById("nome").value = localStorage.getItem("nome");
+			document.getElementById("email").value = localStorage.getItem("email");
+			turma = localStorage.getItem("turma");
+			document.getElementById(turma).checked = true;
+		}
+
+		</script>
+		
+
+
+</body>
+
+
+
+
+</html>

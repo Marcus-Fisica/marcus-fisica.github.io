@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+</head>
+<body style = "background-color:#000000" id = "aaa">
+<br>
+<a id = "a1" style = "color:white"> Verifique seus dados</a><br>
+<h1 style = "color:#FFEEEE; text-align:center">
+O dijuntor desarmou!
+</h1>
+
+
+<script>
+
+window.onload = function(){
+
+	nome = localStorage.getItem("nome")
+	turma = localStorage.getItem("turma")
+	email = localStorage.getItem("email")
+
+	document.getElementById("a1").innerHTML = nome + " - " + turma + "<br>" + email
+}
+
+
+function openFullscreen() {
+  var elem = document.documentElement;
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+function explicar(){location.replace("desarme2.html")}
+function refazer(){location.replace("atividade.html")}
+
+</script>
+
+		<br>
+		<div style = "display: flex;justify-content: center;">
+		<input type="button" style = "height:50px;width:200px;background-color:#4CAF50;color:#FFFFFF;font-size:1.3em " value="Por que?" onClick = "explicar()"/>
+		"                "
+		<input type="button" style = "height:50px;width:200px;background-color:#FF0000;color:#FFFFFF;font-size:1.3em " value="Tentar de Novo" onClick = "refazer()"/>
+		</div>
+</body>
+</html>
